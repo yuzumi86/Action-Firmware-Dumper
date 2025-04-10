@@ -6,6 +6,12 @@ on:
       link:
         description: 'Firmware Link'
         required: true
+      GITLAB_TOKEN:
+        description: 'Gitlab token'
+        required: true
+      GITLAB_GROUP:
+        description: 'Gitlab group'
+        required: true
 
 env:
   LINK: ${{ github.event.inputs.link }}
@@ -47,8 +53,8 @@ jobs:
         run: |
              cd DumprX
              export PUSH_TO_GITLAB=true
-             echo "yuzumi-dumps" > .gitlab_group
-             echo "${{ secrets.GITLAB_TOKEN }}" > .gitlab_token
+             echo "${{ github.event.inputs.GITLAB_GROUP }}" > .gitlab_group
+             echo "${{ github.event.inputs.GITLAB_TOKEN }}" > .gitlab_token
              echo "${{ secrets.TGCHAT }}" >.tg_chat
              echo "${{ secrets.TGTOKEN }}" > .tg_token
              bash dumper.sh $LINK
