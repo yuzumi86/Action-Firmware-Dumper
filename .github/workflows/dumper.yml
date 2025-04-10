@@ -6,9 +6,6 @@ on:
       link:
         description: 'Firmware Link'
         required: true
-      GITLAB_TOKEN:
-        description: 'Gitlab token'
-        required: true
       GITLAB_GROUP:
         description: 'Gitlab group'
         required: true
@@ -53,10 +50,10 @@ jobs:
         run: |
              cd DumprX
              export PUSH_TO_GITLAB=true
-             echo "${{ github.event.inputs.GITLAB_GROUP }}" > .gitlab_group
-             echo "${{ github.event.inputs.GITLAB_TOKEN }}" > .gitlab_token
+             echo "${{ github.event.inputs.GITLAB_GROUP }}" >.gitlab_group
+             echo "${{ secrets.GITLAB_TOKEN }}" >.gitlab_token
              echo "${{ secrets.TGCHAT }}" >.tg_chat
-             echo "${{ secrets.TGTOKEN }}" > .tg_token
+             echo "${{ secrets.TGTOKEN }}" >.tg_token
              bash dumper.sh $LINK
 
 
